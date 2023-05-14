@@ -9,8 +9,9 @@
     <title>Form Input</title>
 </head>
 <body>
-    <div class="h-screen container">
-        <div class="mt-5 w-50">
+    <div class="h-screen container mb-5">
+        <h1 class="text-center my-2">Form Input</h1>
+        <div class=" w-50">
             <form id="form_id">
                 <div class="mb-3">
                     <label for="number" class="form-label">Number</label>
@@ -26,8 +27,8 @@
         <div class="mt-5">
             <table id="table-data" class="table table-light table-striped">
                 <thead>
-                    <tr>
-                        <th>No.</th>
+                    <tr>    
+                        <th>Index</th>
                         <th>Text</th>
                     </tr>
                 </thead>
@@ -37,7 +38,7 @@
     </div>
     <script>
        $(document).ready(function() {
-    $('#form_id').submit(function(event) {
+       $('#form_id').submit(function(event) {
         event.preventDefault(); // prevent default form submission
 
         $.ajax({
@@ -55,7 +56,7 @@
                 });
 
                 // append table data to table body and show table with animation
-                $('#table-data tbody').html(tableData).hide().fadeIn();
+                $('#table-data tbody').html(tableData).hide().fadeIn('slow');
             }
         });
     });
