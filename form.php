@@ -42,13 +42,18 @@
       event.preventDefault(); // prevent default form submission
   
       $.ajax({
-        url: 'script.php',
-        method: 'POST',
-        data: $(this).serialize(), // serialize form data
+        url: "script.php",
+        method: "POST",
+        data: {
+        text: text,
+        number: number
+      },
         success: function(data) {
             console.log(data);
+
+            console.log(data);
             let dataArray = JSON.parse(data); // parse JSON data
-            let tableData = ''; // create empty table data
+            let tableData = " "; // create empty table data
   
           // loop through array to create table rows
           $.each(dataArray, function(index, value) {
