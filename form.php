@@ -14,54 +14,58 @@
             <form id="form_id">
                 <div class="mb-3">
                     <label for="number" class="form-label">Number</label>
-                    <input type="text" class="form-control" id="number" aria-describedby="numberHelp" name="number" required>
+                    <input type="number" class="form-control" id="number" aria-describedby="numberHelp" name="number" required>
                 </div>
                 <div class="mb-3">
                     <label for="text" class="form-label">Text</label>
-                    <input type="text" class="form-control" id="text" name="text"required>
+                    <input type="text" class="form-control" id="text" name="text" required>
                 </div>
                 <button type="submit" class="btn btn-primary" id="submit">Submit</button>
             </form>
         </div>
         <div class="mt-5">
-        <table id="table-data" class="table table-light table-striped">
-          <thead>
-            <tr>
-              <th>No.</th>
-              <th>Text</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-    </div>
+            <table id="table-data" class="table table-light table-striped">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Text</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
     </div>
     <script>
-        $(document).ready(function() {
+       $(document).ready(function() {
     $('#form_id').submit(function(event) {
-      event.preventDefault(); // prevent default form submission
-  
-      $.ajax({
-        url: 'script.php',
-        method: 'POST',
-        data: $(this).serialize(), // serialize form data
-        success: function(data) {
-            console.log(data);
-            let dataArray = JSON.parse(data); // parse JSON data
-            let tableData = ''; // create empty table data
-  
-          // loop through array to create table rows
-          $.each(dataArray, function(index, value) {
-            tableData += '<tr><td>' + (index + 1) + '</td><td>' + value + '</td></tr>';
-          });
-  
-          // append table data to table body and show table with animation
-          $('#table-data tbody').html(tableData).hide().fadeIn();
-        }
-      });
+        event.preventDefault(); // prevent default form submission
+
+        $.ajax({
+            url: 'script.php',
+            method: 'POST',
+            data: $(this).serialize(), // serialize form data
+            dataType: 'json', // add dataType to specify JSON response
+            success: function(data) {
+                console.log(data);
+                let tableData = ''; // create empty table data
+
+                // loop through array to create table rows
+                $.each(data, function(index, value) {
+                    tableData += '<tr><td>' + (index + 1) + '</td><td>' + value + '</td></tr>';
+                });
+
+                // append table data to table body and show table with animation
+                $('#table-data tbody').html(tableData).hide().fadeIn();
+            }
+        });
     });
-  });
-  
-    </script>
+});
+
+</script>
 </body>
 </html>
+
+
+
+
+
